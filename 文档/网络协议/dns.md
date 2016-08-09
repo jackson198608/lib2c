@@ -74,7 +74,7 @@
 - 任何一个连接在因特网上的主机或路由器，都有一个唯一的层次结构的名字，即域名(domain name)
 - 这里，“域”(domain)是名字空间中一个可被管理的划分
 - 从语法上讲，每一个域名都是有标号(label)序列组成，而各标号之间用点(小数点)隔开。
-- ![demo](images/domain.png "logo图片")
+- ![](/images/domain.png "logo图片")
 
 ### 域名格式规定
 - 域名中的标号都有英文和数字组成，每一个标号不超过63个字符(为了记忆方便，一般不会超过12个字符)，也不区分大小写字母
@@ -92,7 +92,7 @@
 (2)通用顶级域名gTLD：最常见的通用顶级域名有7个，即：com(公司企业)，net(网络服务机构)，org(非营利组织)，int(国际组织)，gov(美国的政府部门)，mil(美国的军事部门)。
 (3)基础结构域名(infrastructure domain)：这种顶级域名只有一个，即arpa，用于反向域名解析，因此称为反向域名。
 ```
-- ![demo](images/domain-tree.png "logo图片")
+- ![](/images/domain-tree.png "logo图片")
 
 
 ### 域名服务器
@@ -117,7 +117,7 @@
 
 ##### 本地域名服务器
 - 本地服务器不属于下图的域名服务器的层次结构，但是它对域名系统非常重要。当一个主机发出DNS查询请求时，这个查询请求报文就发送给本地域名服务器。 
-- ![demo](images/domain-space.png "logo图片")
+- ![](/images/domain-space.png "logo图片")
 
 
 ### 域名解析过程详解
@@ -142,7 +142,7 @@
 最后，知道了所要解析的IP地址或报错，然后把这个结果返回给发起查询的主机。
 ```
 #### 图示区别
-- ![demo](images/domain-search-process.png "logo图片")
+- ![](/images/domain-search-process.png "logo图片")
 
 
 #### 高速缓存
