@@ -179,7 +179,7 @@
 
 ### 标志（2字节）
 - 按bit分析展示如下图:
- ![](/images/domain-datagram-sign.png "logo图片")
+- ![](/images/domain-datagram-sign.png "logo图片")
 
 | 名称        |说明           | 
 | :------------- |:-------------| 
@@ -199,17 +199,18 @@
 
 ### 查询问题部分
 - 详细如下图:
- ![](/images/domain-datagram-problem-1.gif "logo图片")
+- ![](/images/domain-datagram-problem-1.gif "logo图片")
 
 #### 查询名
 - 查询名部分长度不定，一般为要查询的域名（也会有IP的时候，即反向查询）
 - 此部分由一个或者多个标示符序列组成，每个标示符以首字节数的计数值来说明该标示符长度，每个名字以0结束。计数字节数必须是0~63之间。
 - 该字段无需填充字节
 - 比如要查询gemini.tuc.noao.edu,具体信息如图:
- ![](/images/domain-datagram-problem-2.gif "logo图片")
+- ![](/images/domain-datagram-problem-2.gif "logo图片")
 
 #### 查询类型
 - 通常查询类型为A（由名字获得IP地址）或者PTR（获得IP地址对应的域名），类型列表如下:
+
 | 类型        |助记符           |说明 |
 | :------------- |:-------------|:-------------|
 |1 |A |IPv4地址|
