@@ -1,14 +1,3 @@
-/*************************************************************************
-    > File Name: MyFiles/C和C++程序/socket/getIP.c
-    > Author: mr_zys
-    > Mail: 247629929@qq.com 
-    > Created Time: Thu 12 Jun 2014 05:22:06 PM CST
-  > Operating System: Ubuntu 12.04 LTS
-  > Programming Language: Linux c
-  > Compiler: gcc
-  > Description: this is a program with Linux socket APIs to ask DNS server for domain name's IP adress!
- ************************************************************************/
-
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -17,6 +6,7 @@
 #include<sys/socket.h>
 #include<netinet/in.h>
 #include<netdb.h>
+#include ""
 
 #define MAX_SIZE 1024
 #define SERVER_PORT 53

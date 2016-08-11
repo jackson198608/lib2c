@@ -166,7 +166,7 @@
 
 ## 报文详情
 - 查询的过程一般是：客户向DNS服务器的53端口发送UDP报文，DNS服务器收到后进行处理，并把结果记录仍以UDP报文的形式返回过来。
-- ![](/images/domain-datagram.png "logo图片")
+- ![](/images/domain-datagram.jpg "logo图片")
 ```
 并不是所有DNS报文都有以上各个部分的。
     图中标示的“12字节”为DNS首部，这部分肯定都会有，
@@ -179,7 +179,7 @@
 
 ### 标志（2字节）
 - 按bit分析展示如下图:
-- ![](/images/domain-datagram-sign.png "logo图片")
+- ![](/images/domain-datagram-sign.jpg "logo图片")
 
 | 名称        |说明           | 
 | :------------- |:-------------| 
