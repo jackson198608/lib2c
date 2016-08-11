@@ -6,16 +6,16 @@
 #include<sys/socket.h>
 #include<netinet/in.h>
 #include<netdb.h>
-#include ""
 
 #define MAX_SIZE 1024
 #define SERVER_PORT 53
 
 void setHead(unsigned char *buf)
 {
-  buf[0] = 0x00;
+
+  buf[0] = 0;
   buf[1] = 0;
-  buf[2] = 0x01;
+  buf[2] = 0;
   buf[3] = 0;
   buf[4] = 0;
   buf[5] = 1;
@@ -33,6 +33,7 @@ void setQuery(char *name, unsigned char *buf, int len)
   buf[pos+2] = 0;
   buf[pos+3] = 1;
 }
+
 int changeDN(char *DN,char *name)
 {
   int i = strlen(DN) - 1;
@@ -85,7 +86,7 @@ void resolve(unsigned char *recvMsg, int len, int len_recvMsg)
     unsigned char offset = recvMsg[pos+11];
     if(retype == 1) {
       if(now_pos == cnt && reclass == 1) {
-        printf("%u.%u.%u.%u\n",recvMsg[pos+12],recvMsg[pos+13],recvMsg[pos+13],recvMsg[pos+14]);
+        printf("%u.%u.%u.%u\n",recvMsg[pos+12],recvMsg[pos+13],recvMsg[pos+14],recvMsg[pos+15]);
       }
     }
     else if(retype == 5) {
@@ -97,15 +98,12 @@ void resolve(unsigned char *recvMsg, int len, int len_recvMsg)
 int main()
 {
   unsigned char buf[MAX_SIZE]; /* socket发送的数据 */
-  char DN[MAX_SIZE]; /* 将要解析的域名(www.xxx.xxx) */
+  char DN[MAX_SIZE]="www.163.com"; /* 将要解析的域名(www.xxx.xxx) */
   char name[MAX_SIZE]; /* 转换为符合DNS报文格式的域名 */
   char recvMsg[MAX_SIZE]; /* 接收的数据 */
   int len; /* socket发送数据的长度 */
   int s; /* socket handler */
 
-  printf("输入需要解析的域名：");
-  scanf("%s",DN);
-  
   len = changeDN(DN,name);
   //printName(len,name); /* 打印转换后的域名，检测是否转换正确 */
   int j;
