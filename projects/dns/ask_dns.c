@@ -9,6 +9,7 @@
 
 #define MAX_SIZE 1024
 #define SERVER_PORT 53
+#define DNS_SERVER "114.114.114.114"
 
 void setHead(unsigned char *buf)
 {
@@ -34,24 +35,24 @@ void setQuery(char *name, unsigned char *buf, int len)
   buf[pos+3] = 1;
 }
 
-int changeDN(char *DN,char *name)
+int changeDN(char *domain,int domainLen,char *name)
 {
-  int i = strlen(DN) - 1;
+  int i = domainLen - 1;
   int j = i + 1;
   int k;
   name[j+1] = 0;
   for(k = 0; i >= 0; i--,j--) {
-    if(DN[i] == '.') {
+    if(domain[i] == '.') {
       name[j] = k;
       k = 0;
     }
     else {
-      name[j] = DN[i];
+      name[j] = domain[i];
       k++;
     }
   }
   name[0] = k;
-  return (strlen(DN) + 2);
+  return (domainLen + 2);
 }
 void printName(int len, char *name)
 {
@@ -66,7 +67,7 @@ int sendDNSPacket(unsigned char *buf, int len, char *recvMsg)
   struct sockaddr_in sin;
 
   memset(&sin,0,sizeof(sin));
-  sin.sin_addr.s_addr = inet_addr("114.114.114.114");
+  sin.sin_addr.s_addr = inet_addr(DNS_SERVER);
   sin.sin_family = AF_INET;
   sin.sin_port = htons(SERVER_PORT);
 
@@ -75,8 +76,9 @@ int sendDNSPacket(unsigned char *buf, int len, char *recvMsg)
   return recv(s,recvMsg,MAX_SIZE,0);
 
 }
-void resolve(unsigned char *recvMsg, int len, int len_recvMsg)
+void resolve(unsigned char *recvMsg, int len, int len_recvMsg,unsigned* result,int resultLen)
 {
+	printf("testdddd\n");
   int pos = len;
   int cnt = 12;
   while(pos < len_recvMsg) {
@@ -87,6 +89,11 @@ void resolve(unsigned char *recvMsg, int len, int len_recvMsg)
     if(retype == 1) {
       if(now_pos == cnt && reclass == 1) {
         printf("%u.%u.%u.%u\n",recvMsg[pos+12],recvMsg[pos+13],recvMsg[pos+14],recvMsg[pos+15]);
+		result[0]=recvMsg[pos+12];
+		result[1]=recvMsg[pos+13];
+		result[2]=recvMsg[pos+14];
+		result[3]=recvMsg[pos+15];
+		return;
       }
     }
     else if(retype == 5) {
@@ -95,16 +102,22 @@ void resolve(unsigned char *recvMsg, int len, int len_recvMsg)
     pos = pos + 12 + offset;
   }
 }
-int main()
+
+/*
+result: the array save the ip result
+resultLen: len of result array
+domain: char array save the search domain name
+domainLen: len of the domain array
+*/
+void getARecord(unsigned *result,int resultLen,char* domain,int domainLen)
 {
   unsigned char buf[MAX_SIZE]; /* socket发送的数据 */
-  char DN[MAX_SIZE]="www.163.com"; /* 将要解析的域名(www.xxx.xxx) */
   char name[MAX_SIZE]; /* 转换为符合DNS报文格式的域名 */
   char recvMsg[MAX_SIZE]; /* 接收的数据 */
   int len; /* socket发送数据的长度 */
   int s; /* socket handler */
 
-  len = changeDN(DN,name);
+  len = changeDN(domain,domainLen,name);
   //printName(len,name); /* 打印转换后的域名，检测是否转换正确 */
   int j;
   //printf("len is %d\n",len);
@@ -112,14 +125,16 @@ int main()
   setQuery(name,buf,len);
   len += 16;
   int len_recvMsg = sendDNSPacket(buf,len,recvMsg);
-  printf("接收的报文长度为 %d 字节\n",len_recvMsg);
-  printf("下面是接收报文的16进制表示：\n");
   int i;
-  for(i = 0; i < len_recvMsg; i++) {
-    printf("%x.",(unsigned char)recvMsg[i]);
-  }
-  printf("\n");
-  printf("%s的IP地址为：\n",DN);
-  resolve(recvMsg,len,len_recvMsg);
+  resolve(recvMsg,len,len_recvMsg,result,resultLen);
+
+}
+
+
+int main(){
+	unsigned result[4];
+	char doamin[MAX_SIZE]="www.163.com";
+	getARecord(result,4,doamin,strlen(doamin));
+	printf("%u\n",result[0]);
 
 }
