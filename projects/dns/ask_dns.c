@@ -7,13 +7,10 @@
 #include<netinet/in.h>
 #include<netdb.h>
 
-#define MAX_SIZE 1024
-#define SERVER_PORT 53
-#define DNS_SERVER "114.114.114.114"
+#include "ask_dns.h"
 
 void setHead(unsigned char *buf)
 {
-
   buf[0] = 0;
   buf[1] = 0;
   buf[2] = 0;
@@ -78,7 +75,6 @@ int sendDNSPacket(unsigned char *buf, int len, char *recvMsg)
 }
 void resolve(unsigned char *recvMsg, int len, int len_recvMsg,unsigned* result,int resultLen)
 {
-	printf("testdddd\n");
   int pos = len;
   int cnt = 12;
   while(pos < len_recvMsg) {
@@ -88,7 +84,6 @@ void resolve(unsigned char *recvMsg, int len, int len_recvMsg,unsigned* result,i
     unsigned char offset = recvMsg[pos+11];
     if(retype == 1) {
       if(now_pos == cnt && reclass == 1) {
-        printf("%u.%u.%u.%u\n",recvMsg[pos+12],recvMsg[pos+13],recvMsg[pos+14],recvMsg[pos+15]);
 		result[0]=recvMsg[pos+12];
 		result[1]=recvMsg[pos+13];
 		result[2]=recvMsg[pos+14];
@@ -127,14 +122,13 @@ void getARecord(unsigned *result,int resultLen,char* domain,int domainLen)
   int len_recvMsg = sendDNSPacket(buf,len,recvMsg);
   int i;
   resolve(recvMsg,len,len_recvMsg,result,resultLen);
-
 }
 
-
+/*
 int main(){
 	unsigned result[4];
 	char doamin[MAX_SIZE]="www.163.com";
 	getARecord(result,4,doamin,strlen(doamin));
-	printf("%u\n",result[0]);
-
+	printf("%u.%u.%u.%u\n",result[0],result[1],result[2],result[3]);
 }
+*/

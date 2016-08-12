@@ -1,7 +1,6 @@
-ask_dns: ask_dns.o
-	gcc -o ask_dns ask_dns.o
-
-ask_dns.o: ask_dns.c
-	gcc -o ask_dns.o -c ask_dns.c 
+libaskDns.so: ask_dns.o
+	gcc -shared -o libaskDns.so ask_dns.o
+ask_dns.o: ask_dns.c ask_dns.h
+	gcc -fpic -o ask_dns.o -c ask_dns.c 
 clean:
-	rm -rf ask_dns ask_dns.o
+	rm -rf libaskDns.so ask_dns.o
