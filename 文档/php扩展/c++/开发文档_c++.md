@@ -58,4 +58,11 @@ extern "C" {
 }
 ```
 
+## 2.4 测试文件php
+```php
+<?php
+	myFunction();
+?>
+```
 
+# 3.接收参数
