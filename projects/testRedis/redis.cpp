@@ -3,7 +3,7 @@
 int main()
 {
 		Redis *r = new Redis();
-		if(!r->connect("210.14.154.198", 6379))
+		if(!r->connect("ip", 6379))
 		{
 				printf("connect error!\n");
 				return 0;
