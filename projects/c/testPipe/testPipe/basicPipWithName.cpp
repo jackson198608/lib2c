@@ -11,13 +11,14 @@
 #include <sys/stat.h>
 #include "basicPipWithName.h"
 
+const char* filename="/tmp/readme";
 
 void processOne(){
-
+    std::cout<<"this is processOne()"<<std::endl;
 }
 
 void processTwo(){
-
+    std::cout<<"this is processTwo()"<<std::endl;
 }
 
 
@@ -27,5 +28,6 @@ void testNamedPip(int type){
     } else if(type==2){
         processTwo();
     }
- }
+}
+
 

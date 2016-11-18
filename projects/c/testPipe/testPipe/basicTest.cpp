@@ -8,8 +8,11 @@
 
 #include <iostream>
 #include <unistd.h>
+#include "basicPipWithName.h"
+#include <string.h>
 
-int main(int argc, const char * argv[]) {
+
+void testPipBlock(){
     std::cout<<"begin\n";
     int Pipe[2];
     pipe(Pipe);
@@ -23,8 +26,6 @@ int main(int argc, const char * argv[]) {
         for(int i=0;i<10;i++){
             std::cout<<"father:"<<i<<std::endl;
             write(Pipe[1], "hi" , 2);
-            read(Pipe[0], buf,sizeof(buf));
-            std::cout<<"father: "<<buf<<std::endl;
         }
     
         
@@ -34,16 +35,35 @@ int main(int argc, const char * argv[]) {
         
         for(int i=0;i<10;i++){
             memset(buf, 0, 10);
-            std::cout<<"child:"<<i<<std::endl;
-            read(Pipe[0], buf,sizeof(buf));
-            std::cout<<"child: "<<buf<<std::endl;
+            std::cout<<"child:"<<i;
+            read(Pipe[0], buf,2);
+            std::cout<<buf<<"\n";
             
         }
         
     }
     
-    waitpid(pid, NULL, 0);
+    waitpid(pid, NULL, 0);    
+}
+
+void testPipNonBlock(){
+        //todo
+}
+
+int main(int argc, const char * argv[]) {
     
+    const char* type=argv[1];
+    if(strcmp(type, "0")==0){
+        testPipBlock();
+    } else if(strcmp(type, "1")==0){
+        std::cout<<"1"<<std::endl;
+        testNamedPip(1);
+    } else if(strcmp(type, "2")==0){
+        std::cout<<"2"<<std::endl;
+
+        testNamedPip(2);
+    }
 
     return 0;
 }
+

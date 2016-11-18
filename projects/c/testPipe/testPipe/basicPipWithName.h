@@ -9,5 +9,11 @@
 #ifndef basicPipWithName_h
 #define basicPipWithName_h
 
+void testNamedPip(int type);
 
 #endif /* basicPipWithName_h */
+
+
+
+
+

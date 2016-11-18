@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1653E02C1DDF12260036758F /* basicTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1653E02B1DDF12260036758F /* basicTest.cpp */; };
 		1653E0331DDF270F0036758F /* Readme.md in Sources */ = {isa = PBXBuildFile; fileRef = 1653E0321DDF270F0036758F /* Readme.md */; };
+		1653E0351DDF2B820036758F /* basicPipWithName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1653E0341DDF2B820036758F /* basicPipWithName.cpp */; };
+		1653E0381DDF51E40036758F /* makefile in Sources */ = {isa = PBXBuildFile; fileRef = 1653E0371DDF51E40036758F /* makefile */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,6 +29,9 @@
 		1653E0281DDF12260036758F /* testPipe */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = testPipe; sourceTree = BUILT_PRODUCTS_DIR; };
 		1653E02B1DDF12260036758F /* basicTest.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = basicTest.cpp; sourceTree = "<group>"; };
 		1653E0321DDF270F0036758F /* Readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
+		1653E0341DDF2B820036758F /* basicPipWithName.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = basicPipWithName.cpp; sourceTree = "<group>"; };
+		1653E0361DDF4BEE0036758F /* basicPipWithName.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = basicPipWithName.h; sourceTree = "<group>"; };
+		1653E0371DDF51E40036758F /* makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = makefile; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +65,9 @@
 			isa = PBXGroup;
 			children = (
 				1653E02B1DDF12260036758F /* basicTest.cpp */,
+				1653E0371DDF51E40036758F /* makefile */,
+				1653E0341DDF2B820036758F /* basicPipWithName.cpp */,
+				1653E0361DDF4BEE0036758F /* basicPipWithName.h */,
 				1653E0321DDF270F0036758F /* Readme.md */,
 			);
 			path = testPipe;
@@ -122,7 +130,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1653E0351DDF2B820036758F /* basicPipWithName.cpp in Sources */,
 				1653E0331DDF270F0036758F /* Readme.md in Sources */,
+				1653E0381DDF51E40036758F /* makefile in Sources */,
 				1653E02C1DDF12260036758F /* basicTest.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
